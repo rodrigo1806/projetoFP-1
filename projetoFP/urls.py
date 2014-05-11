@@ -13,4 +13,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pessoas/', include('pessoas.urlsPessoas')),
     url(r'^caixas/', include('caixas.urlsCaixas')),
+    url(r'^fluxoCaixa/', 'caixas.views.caixaCalculo'),
+    url(r'^calculo/', 'caixas.views.caixaGerarCalculo'),
 )

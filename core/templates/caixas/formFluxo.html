@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Pessoas{% endblock titulo %}
+
+{% block conteudo %}
+
+<form action="/calculo/" method="POST" role="form" target="_blank">{% csrf_token %}
+	<div class="row">
+        
+        <div class="col-sm-6">
+        	<label for="nome" class="control-label">Nome da Pessoa</label>
+            <input name="nome" id="nome" type="text" class="form-control" >
+        </div>
+    </div>
+
+
+    <div class="row">
+    <div class="col-sm-5">
+    	<label>Data Inicial</label>
+                <div class="input-append date datetimepicker" class="form-control">
+                    <input type="text" name="dtInicio">
+                    <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+    </div>
+
+    <div class="row">
+    <div class="col-sm-5">
+    	<label>Data Final</label>
+                <div class="input-append date datetimepicker" class="form-control">
+                    <input type="text" name="dtFinal">
+                    <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+    </div>
+
+    <div class="row">
+    <div class="col-sm-5">
+    	<button type="submit" class="btn btn-success">Gerar Fluxo</button>
+    </div>
+    </div>	
+</form>
+
+
+{% endblock conteudo %}

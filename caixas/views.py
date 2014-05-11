@@ -72,6 +72,12 @@ def caixaExcluir(request, pk=0):
     except:
         return HttpResponseRedirect('/caixas/')
 
+def caixaCalculo(request):
+    return render(request, 'caixas/formFluxo.html')
+
+def caixaGerarCalculo(request):
+    return render(request, 'caixas/listaFluxo.html')
+
 
 
 
