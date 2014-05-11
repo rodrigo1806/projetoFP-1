@@ -4,6 +4,7 @@
 
 {% block conteudo %}
 
+
 <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -18,7 +19,7 @@
         <tbody>
         {% for conta in contas %}
           <tr>
-            <td><a href="/caixas/editar/{{ conta.pk }}">{{ conta.pessoa.nome }}</a></td>
+            <td>{{ conta.pessoa.nome }}</td>
             <td>{{ conta.valor }}</td>
             <td>{{ conta.descricao }}</td>
             <td>{{ conta.data|date:"d/m/Y" }}</td>
@@ -27,6 +28,7 @@
         {% endfor %}  
         </tbody>
       </table>
+      <label>{{ somaconta }}</label>
 </div><!-- FIM TABELA -->
 
 {% endblock conteudo %}

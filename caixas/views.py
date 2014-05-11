@@ -76,7 +76,40 @@ def caixaCalculo(request):
     return render(request, 'caixas/formFluxo.html')
 
 def caixaGerarCalculo(request):
-    return render(request, 'caixas/listaFluxo.html')
+    if request.method == 'POST':
+        nome = request.POST.get('nome', '').upper()
+        dtInicio = request.POST.get('dtInicio', '')
+        dtFinal = request.POST.get('dtFinal', '')
+        somaconta = 0
+
+        try:
+            if nome != '' and dtInicio == '' and dtFinal == '':
+                sql = ("select cc.* from caixas_conta cc inner join pessoas_pessoa pp on pp.id = cc.pessoa_id where pp.nome like '%s' order by cc.data") % ('%%'+nome+'%%')
+                contas = Conta.objects.raw(sql)
+                
+
+            elif nome == '' and dtInicio != '' and dtFinal != '':
+                
+                sql = "select cc.* from caixas_conta cc where strftime('%d/%m/%Y', cc.data) > '"+dtInicio+"' and strftime('%d/%m/%Y', cc.data)  < '"+dtFinal+"' order by cc.data"
+                contas = Conta.objects.raw(sql)
+
+            elif nome != '' and dtInicio != '' and dtFinal != '':
+                
+                sql = ("select cc.* from caixas_conta cc inner join pessoas_pessoa pp on pp.id = cc.pessoa_id where pp.nome like '"+"%"+nome+"%"+"' and strftime('%d/%m/%Y', cc.data) > '"+dtInicio+"' and strftime('%d/%m/%Y', cc.data)  < '"+dtFinal+"' order by cc.data")
+                contas = Conta.objects.raw(sql)
+
+            for conta in contas:
+                if conta.tipo == 'S':
+                    somaconta = somaconta - conta.valor
+                elif conta.tipo == 'E':
+                    somaconta = somaconta + conta.valor
+
+
+
+        except:
+            contas = []
+
+    return render(request, 'caixas/listaFluxo.html', {'contas': contas, 'somaconta':somaconta})
 
 
 
