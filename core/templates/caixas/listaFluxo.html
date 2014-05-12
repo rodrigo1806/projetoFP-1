@@ -4,8 +4,23 @@
 
 {% block conteudo %}
 
+<style type="text/css">
+  @media print
+  {
+    .btn
+    {
+      display: none;
+    }
+    #lblcabe
+    {
+      display: block;
+    }
+  }
+</style>
 
-<div class="table-responsive">
+
+<div class="table-responsive" >
+  <label id="lblcabe" align="center" style="display: none"> Relatório do Fluxo de Caixa</label>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -28,7 +43,8 @@
         {% endfor %}  
         </tbody>
       </table>
-      <label>{{ somaconta }}</label>
+      <label>Saldo Total: R${{ somaconta }}</label>
+      <button type="button" onclick="window.print()" class="btn btn-success">Imprimir</button>
 </div><!-- FIM TABELA -->
 
 {% endblock conteudo %}
