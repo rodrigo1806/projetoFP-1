@@ -90,12 +90,12 @@ def caixaGerarCalculo(request):
 
             elif nome == '' and dtInicio != '' and dtFinal != '':
                 
-                sql = "select cc.* from caixas_conta cc where strftime('%d/%m/%Y', cc.data) > '"+dtInicio+"' and strftime('%d/%m/%Y', cc.data)  < '"+dtFinal+"' order by cc.data"
+                sql = ("select cc.* from caixas_conta cc where strftime('%s', cc.data) between '%s' and '%s' ") % ('%d/%m/%Y', dtInicio, dtFinal)
                 contas = Conta.objects.raw(sql)
 
             elif nome != '' and dtInicio != '' and dtFinal != '':
                 
-                sql = ("select cc.* from caixas_conta cc inner join pessoas_pessoa pp on pp.id = cc.pessoa_id where pp.nome like '"+"%"+nome+"%"+"' and strftime('%d/%m/%Y', cc.data) > '"+dtInicio+"' and strftime('%d/%m/%Y', cc.data)  < '"+dtFinal+"' order by cc.data")
+                sql = ("select cc.* from caixas_conta cc inner join pessoas_pessoa pp on pp.id = cc.pessoa_id where pp.nome like '%s' and strftime('%s', cc.data) between '%s' and '%s'order by cc.data") % ('%%'+nome+'%%', '%d/%m/%Y', dtInicio, dtFinal)
                 contas = Conta.objects.raw(sql)
 
             for conta in contas:
