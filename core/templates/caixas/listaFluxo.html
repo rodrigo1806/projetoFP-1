@@ -7,20 +7,26 @@
 <style type="text/css">
   @media print
   {
+    
     .btn
     {
       display: none;
     }
-    #lblcabe
+
+    #voltar
     {
-      display: block;
+      display: none;
+    }
+    #lblcabe,
+    {
+      display: inline;
     }
   }
 </style>
 
 
 <div class="table-responsive" >
-  <label id="lblcabe" align="center" style="display: none"> Relatório do Fluxo de Caixa</label>
+  </br><label align="center"  bold> Relatório do Fluxo de Caixa</label></br>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -41,10 +47,11 @@
             <td>{{ conta.tipo }}</td>
           </tr>
         {% endfor %}  
-        </tbody>
+        </tbody>        
       </table>
       <label>Saldo Total: R${{ somaconta }}</label>
       <button type="button" onclick="window.print()" class="btn btn-success">Imprimir</button>
+      <a id="voltar" href="../fluxoCaixa/"><button type="button" class="btn btn-success" >Voltar</button></a>
 </div><!-- FIM TABELA -->
 
 {% endblock conteudo %}
